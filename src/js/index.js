@@ -1,2 +1,3 @@
 import x from './test';
-console.log(`imported ${x} from another module`);
+const num = 23;
+console.log(`imported ${x} from another module and num is ${num}`);
