@@ -2,6 +2,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import {clearLoader, elements, renderLoader} from "./views/base";
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 
 
 /** Global state of the app
@@ -25,8 +26,6 @@ const state = {};
  */
 const controlSearch = async () => {
     const query = searchView.getInput();
-    console.log(query);
-
 
     if (query) {
         state.search = new Search(query);
@@ -44,8 +43,6 @@ const controlSearch = async () => {
             clearLoader();
         }
 
-
-
     }
 };
 
@@ -53,6 +50,11 @@ elements.searchForm.addEventListener('submit' ,e => {
     e.preventDefault();
     controlSearch();
 });
+
+// window.addEventListener('load' ,e => {
+//     e.preventDefault();
+//     controlSearch();
+// });
 
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
@@ -80,13 +82,24 @@ const controlRecipe = async () => {
     const id = window.location.hash.replace('#', '');
 
     if (id) {
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
+        if (state.search) {
+            searchView.highlightSelected(id);
+        }
         state.recipe = new Recipe(id);
+        // window.r = state.recipe;
 
         try{
             await state.recipe.getRecipe();
+            // console.log(state.recipe.ingredients);
+            state.recipe.parseIngredients();
+
             state.recipe.calcTime();
             state.recipe.calcServings();
 
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
             console.log(state.recipe);
         } catch (e) {
             //TODO: HTML can be implemented
