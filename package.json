@@ -21,6 +21,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.4.1",
     "fractional": "^1.0.0",
     "jquery": "^3.3.1",
     "uniqid": "^5.2.0"
@@ -30,6 +31,9 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.13.1",
+    "precss": "^4.0.0",
+    "sass-loader": "^8.0.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.10.3"
