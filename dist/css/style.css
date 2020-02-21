@@ -14,6 +14,7 @@ html {
     html {
         font-size: 50%; } }
 
+
 body {
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 400;
@@ -22,7 +23,8 @@ body {
     background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: calc(100vh - 2 * 4vw); }
+    min-height: calc(100vh - 2 * 4vw);
+}
 
 .container {
     max-width: 120rem;
@@ -42,7 +44,7 @@ body {
         border-radius: 0; } }
 
 .btn, .btn-small, .btn-small:link, .btn-small:visited {
-    background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+    background-image: linear-gradient(to right bottom, #eb3349, #f45c43);
     border-radius: 10rem;
     border: none;
     text-transform: uppercase;
@@ -124,11 +126,12 @@ body {
 .heading-2 {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #F59A83;
+    color: #eb3349;
     text-transform: uppercase;
     margin-bottom: 2.5rem;
     text-align: center;
-    transform: skewY(-3deg); }
+    transform: skewY(-3deg);
+}
 
 .copyright {
     color: #968B87;
@@ -163,7 +166,7 @@ body {
     justify-content: space-between; }
 .header__logo {
     margin-left: 4rem;
-    height: 4.5rem;
+    height: 6.5rem;
     display: block; }
 
 .search {
@@ -206,7 +209,7 @@ body {
     visibility: visible;
     opacity: 1; }
 .likes__icon {
-    fill: #F59A83;
+    fill: #eb3349;
     height: 3.75rem;
     width: 3.75rem; }
 .likes__panel {
@@ -307,7 +310,7 @@ body {
 .recipe__fig {
     height: 30rem;
     position: relative;
-    transform: scale(1.04) translateY(-1px);
+    /*transform: scale(1.04) translateY(-1px);*/
     transform-origin: top; }
 .recipe__fig::before {
     content: '';
@@ -318,7 +321,7 @@ body {
     top: 0;
     left: 0;
     background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
-    opacity: .6; }
+    opacity: .4; }
 .recipe__img {
     width: 100%;
     display: block;
