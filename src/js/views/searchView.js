@@ -11,6 +11,8 @@ export const clearResult = () => {
     elements.searchResPages.innerHTML = '';
 };
 
+
+
 export const highlightSelected = id => {
     const resultsArr = Array.from(document.querySelectorAll('.results__link'));
     resultsArr.forEach(el => {
