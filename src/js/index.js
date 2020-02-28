@@ -125,6 +125,7 @@ const controlList = () => {
     state.recipe.ingredients.forEach(el => {
         const item = state.list.addItem(el.count, el.unit, el.ingredient);
         window.items = item;
+        // listView.renderItem(item);
     });
     for (const item of items) {
         listView.renderItem(item);
@@ -132,12 +133,14 @@ const controlList = () => {
 };
 
 elements.shopping.addEventListener('click', e => {
-    let id = e.target.closest('.shopping__item').dataset.itemid;
-    console.log(`***id ${id}`);
+    const id = e.target.closest('.shopping__item').dataset.itemid;
 
     if(e.target.matches('.shopping__delete, .shopping__delete *')) {
         state.list.deleteItem(id);
         listView.deleteItem(id);
+    } else if (e.target.matches('.shopping__count-value')) {
+        const val = parseFloat(e.target.value);
+        state.list.updateCount(id, val);
     }
 
 })
@@ -158,5 +161,3 @@ elements.recipe.addEventListener('click', e => {
 
 const l = new List();
 window.l = l;
-
-
