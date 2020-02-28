@@ -81,13 +81,14 @@ body {
 
 .btn-inline {
     color: #EF4547;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: none;
     background-color: #F9F5F3;
     padding: .8rem 1.2rem;
     border-radius: 10rem;
     cursor: pointer;
     display: flex;
+    /*display: inline-block;*/
     align-items: center;
     transition: all .2s; }
 .btn-inline svg {
@@ -150,7 +151,7 @@ body {
 .loader svg {
     height: 5.5rem;
     width: 5.5rem;
-    fill: #F59A83;
+    fill: #eb3349;
     transform-origin: 44% 50%;
     animation: rotate 1.5s infinite linear; }
 
@@ -222,6 +223,7 @@ svg.search__btn {
     fill: #eb3349;
     height: 3.75rem;
     width: 3.75rem;
+    display: inline-flex;
     }
 .likes__panel {
     position: absolute;
@@ -241,7 +243,8 @@ svg.search__btn {
 }
 
 .likes {
-    padding: 3rem 0; }
+    padding: 3rem 0;
+    display: inline-block;}
 .results__list,
 .likes__list {
     list-style: none; }
@@ -458,14 +461,16 @@ svg.search__btn {
     padding: 8px 14px;
 }
 .shopping {
-    padding: 3rem 4rem;
-    display: flex;
+    padding: 0rem 2rem;
+    /*display: flex;*/
+    display: block;
     /*flex-direction: column; */
 }
 .shopping__list {
     list-style: none;
     max-height: 77rem;
-    overflow: scroll; }
+    overflow: scroll; 
+}
 .shopping__item {
     display: flex;
     align-items: flex-start;
@@ -487,7 +492,7 @@ svg.search__btn {
     font-size: 1.2rem;
     text-align: center;
     border: none;
-    width: 3.7rem;
+    width: 4rem;
     border-radius: 3px; }
 .shopping__count input:focus {
     outline: none;
@@ -498,7 +503,8 @@ svg.search__btn {
     flex: 1;
     font-size: 1.3rem;
     margin-top: .4rem;
-    margin-right: 1.5rem; }
+    margin-right: 1.5rem;
+}
 .shopping__delete {
     margin-top: .5rem;
     position: absolute;

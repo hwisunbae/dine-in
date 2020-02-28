@@ -4,6 +4,7 @@ import List from './models/List';
 import {clearLoader, elements, renderLoader} from "./views/base";
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 
 
 /** Global state of the app
@@ -13,7 +14,7 @@ import * as recipeView from './views/recipeView';
  *  - liked recipes
  */
 const state = {};
-
+window.st = state;
 /* ----------------------
        SEARCH CONTROL
 -------------------------*/
@@ -94,7 +95,7 @@ const controlRecipe = async () => {
 
         try{
             await state.recipe.getRecipe();
-            console.log(state.recipe.ingredients);
+            // console.log(state.recipe.ingredients);
             state.recipe.parseIngredients();
 
             state.recipe.calcTime();
@@ -102,7 +103,7 @@ const controlRecipe = async () => {
 
             clearLoader();
             recipeView.renderRecipe(state.recipe);
-            console.log(state.recipe);
+            // console.log(state.recipe);
         } catch (e) {
             //TODO: HTML can be implemented
             alert('Error processing Recipe');
@@ -114,19 +115,48 @@ const controlRecipe = async () => {
 // window.addEventListener('load', controlRecipe);
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
+/* ----------------------
+       LIST CONTROL
+-------------------------*/
+const controlList = () => {
+    if (!state.list) state.list = new List();
+
+    state.recipe.ingredients.forEach(el => {
+        const item = state.list.addItem(el.count, el.unit, el.ingredient);
+        window.items = item;
+    });
+    for (const item of items) {
+        listView.renderItem(item);
+    }
+};
+
+elements.shopping.addEventListener('click', e => {
+    let id = e.target.closest('.shopping__item').dataset.itemid;
+    console.log(`***id ${id}`);
+
+    if(e.target.matches('.shopping__delete, .shopping__delete *')) {
+        state.list.deleteItem(id);
+        listView.deleteItem(id);
+    }
+
+})
+
 elements.recipe.addEventListener('click', e => {
     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
         if (state.recipe.servings > 1) {
             state.recipe.updateServings('dec');
             recipeView.updateServingsIngredients(state.recipe);
         }
-
     } else if (e.target.matches('.btn-increase, .btn-increase *')) {
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
+    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        controlList();
     }
-    // console.log(state.recipe);
 });
 
 const l = new List();
 window.l = l;
+
+
