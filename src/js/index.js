@@ -1,10 +1,12 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Likes from './models/Likes';
 import {clearLoader, elements, renderLoader} from "./views/base";
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 
 
 /** Global state of the app
@@ -102,9 +104,13 @@ const controlRecipe = async () => {
             state.recipe.calcServings();
 
             clearLoader();
-            recipeView.renderRecipe(state.recipe);
+            recipeView.renderRecipe(
+                state.recipe,
+                state.likes.isLiked(id)
+            );
             // console.log(state.recipe);
         } catch (e) {
+            console.log(e);
             //TODO: HTML can be implemented
             alert('Error processing Recipe');
         }
@@ -156,8 +162,33 @@ elements.recipe.addEventListener('click', e => {
         recipeView.updateServingsIngredients(state.recipe);
     } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         controlList();
+    } else if (e.target.matches('.recipe__love, .recipe__love *')) {
+        controlLike();
     }
 });
 
-const l = new List();
-window.l = l;
+/* ----------------------
+       LIKE CONTROL
+-------------------------*/
+// TODO : TESTING
+state.likes = new Likes();
+const controlLike = () => {
+    if (!state.likes) state.likes = new Likes();
+
+    const currentID = state.recipe.id;
+    if(!state.likes.isLiked(currentID)) {
+        const newLike = state.likes.addLike(
+            state.recipe.id,
+            state.recipe.title,
+            state.recipe.publisher,
+            state.recipe.img
+        );
+        likesView.toggleLikeBtn(true);
+
+    } else {
+        state.likes.deleteLike(currentID);
+        likesView.toggleLikeBtn(false);
+    }
+    console.log(state.likes);
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+}
