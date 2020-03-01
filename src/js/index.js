@@ -170,8 +170,7 @@ elements.recipe.addEventListener('click', e => {
 /* ----------------------
        LIKE CONTROL
 -------------------------*/
-// TODO : TESTING
-state.likes = new Likes();
+
 const controlLike = () => {
     if (!state.likes) state.likes = new Likes();
 
@@ -192,4 +191,14 @@ const controlLike = () => {
     }
     console.log(state.likes);
     likesView.toggleLikeMenu(state.likes.getNumLikes());
-}
+};
+
+window.addEventListener('load', () => {
+    state.likes = new Likes();
+    state.likes.readStorage();
+
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+    state.likes.likes.forEach(like => {
+        likesView.renderLike(like);
+    });
+});
