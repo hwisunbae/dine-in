@@ -184,10 +184,11 @@ const controlLike = () => {
             state.recipe.img
         );
         likesView.toggleLikeBtn(true);
-
+        likesView.renderLike(newLike);
     } else {
         state.likes.deleteLike(currentID);
         likesView.toggleLikeBtn(false);
+        likesView.deleteLike(currentID);
     }
     console.log(state.likes);
     likesView.toggleLikeMenu(state.likes.getNumLikes());
